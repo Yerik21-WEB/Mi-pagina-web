@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset= "UTF-8">
-	<title>Datos Biograficos y Horario</title>
+    <meta charset="UTF-8">
+    <title>Datos Biograficos y Horario</title>
 </head>
 <body>
 
-	<h1>Datos Biograficos</h1>
+    <h1>Datos Biograficos</h1>
 
-	<p><strong>Nombre:</strong> Yerik J. Jimenez M.</p>
-	<p><strong>Carrera:</strong> Licenciatura en Informatica</p>
-	<p><strong>Matricula:</strong> 100509159</p>
-	<p><strong>Institucion:</strong> Universidad Autonoma de Santo Domingo</p>
-	<p><strong>Semestre:</strong> 2026-10</p>
+    <p><strong>Nombre:</strong> Yerik J. Jimenez M.</p>
+    <p><strong>Carrera:</strong> Licenciatura en Informatica</p>
+    <p><strong>Matricula:</strong> 100509159</p>
+    <p><strong>Institucion:</strong> Universidad Autonoma de Santo Domingo</p>
+    <p><strong>Semestre:</strong> 2026-10</p>
 
-	<hr>
+    <hr>
 
-	<h2>Horario de Clases - Semestre 2026-10</h2>
+    <h2>Horario de Clases - Semestre 2026-10</h2>
 
- <table border="1" cellpadding="5" width="50%">
+    <table border="1" cellpadding="5" width="60%">
         <tr>
             <th>Día</th>
             <th>Asignatura</th>
@@ -26,30 +26,28 @@
             <th>Aula</th>
         </tr>
 
-	
-	<tr>
+        <tr>
             <td>Martes</td>
-            <td>Ingenieria de Software l</td>
+            <td>Ingenieria de Software I</td>
             <td>6:00 PM - 7:50 PM</td>
             <td>Aula 01</td>
-	</tr>
+        </tr>
 
-	
-	<tr>
+        <tr>
             <td>Miercoles</td>
-            <td>Laboratorio de Lenguaje de Programacion lll </td>
+            <td>Laboratorio de Lenguaje de Programacion III</td>
             <td>7:00 AM - 8:50 AM</td>
             <td>Aula 01</td>
-	</tr>
+        </tr>
 
-
-	<tr>
+        <tr>
             <td>Sabados</td>
-            <td>Lenguaje de Programacion lll </td>
+            <td>Lenguaje de Programacion III</td>
             <td>8:00 AM - 11:50 AM</td>
             <td>Aula 01</td>
-	</tr>
- </table>
+        </tr>
+    </table>
 
 </body>
 </html>
+
