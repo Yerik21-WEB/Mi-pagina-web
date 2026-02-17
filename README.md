@@ -18,7 +18,7 @@
 
 	<h2>Horario de Clases - Semestre 2026-10</h2>
 
- <table border="1" cellpadding="5">
+ <table border="1" cellpadding="5" width="50%">
         <tr>
             <th>Día</th>
             <th>Asignatura</th>
