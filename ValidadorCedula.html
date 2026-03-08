@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador Biométrico de Cédula | JCE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* PALETA DE COLORES EXTRAÍDA DE LA NUEVA CÉDULA */
+            --institucional-header: #a38c64; /* Dorado/Café de la cabecera */
+            --patron-rosa: #e9e4f0;         /* Rosa/Púrpura suave del fondo */
+            --patron-borde: #d1c8e1;        /* Púrpura más oscuro para bordes */
+            --texto-negro: #1a1a1a;
+            --dorado-jce: #b3925d;           /* Dorado del logo */
+            
+            --blanco: #ffffff;
+            --gris-fondo: #fcfcfc;
+            --transicion: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--gris-fondo);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: var(--blanco);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 2px solid var(--patron-borde);
+            text-align: center;
+            position: relative;
+        }
+
+        /* Cabecera institucional imitando la franja de la imagen */
+        .header {
+            background-color: var(--institucional-header);
+            color: var(--blanco);
+            padding: 20px;
+            border-bottom: 5px solid var(--patron-borde);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            padding: 30px;
+            /* Aplicamos un patrón de fondo suave imitando el de la cédula */
+            background-image: 
+                linear-gradient(135deg, var(--patron-rosa) 25%, transparent 25%), 
+                linear-gradient(225deg, var(--patron-rosa) 25%, transparent 25%), 
+                linear-gradient(45deg, var(--patron-rosa) 25%, transparent 25%), 
+                linear-gradient(315deg, var(--patron-rosa) 25%, #ffffff 25%);
+            background-position:  10px 0, 10px 0, 0 0, 0 0;
+            background-size: 20px 20px;
+            background-repeat: repeat;
+        }
+
+        .instruccion {
+            color: var(--texto-negro);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px 0;
+            font-size: 2rem;
+            border: 2.5px solid var(--patron-borde);
+            border-radius: 10px;
+            outline: none;
+            color: var(--texto-negro);
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-align: center;
+            background-color: var(--blanco);
+            transition: var(--transicion);
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: var(--dorado-jce);
+            box-shadow: 0 0 15px rgba(179, 146, 93, 0.2);
+        }
+
+        /* Grupo de botones */
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 18px 30px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: var(--transicion);
+            border: none;
+            flex: 1;
+        }
+
+        .btn-validar {
+            background-color: var(--institucional-header);
+            color: white;
+        }
+
+        .btn-validar:hover {
+            background-color: #8a7653;
+            transform: translateY(-2px);
+            border-bottom: 4px solid var(--dorado-jce);
+        }
+
+        /* BOTÓN LIMPIAR CON COLOR NEGRO DE TEXTO */
+        .btn-limpiar {
+            background-color: var(--patron-rosa);
+            color: var(--texto-negro);
+            border: 2px solid var(--patron-borde);
+        }
+
+        .btn-limpiar:hover {
+            background-color: #d8cedf;
+            color: #000;
+        }
+
+        #mensaje {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Colores de respuesta extraídos de la JCE */
+        .valida { 
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 2px solid #c3e6cb; 
+        }
+        
+        .invalida { 
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border: 2px solid #f5c6cb; 
+        }
+
+        .footer-logo {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            color: var(--institucional-header);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="header">
+            <h1>Cédula de Identidad y Electoral | JCE</h1>
+        </div>
+
+        <div class="content">
+            <p class="instruccion">Ingrese los 11 dígitos para validación estructural:</p>
+            
+            <input type="text" id="cedulaInput" placeholder="001-0000000-0" maxlength="13">
+
+            <div class="button-group">
+                <button class="btn-validar" onclick="ejecutarAlgoritmo()">Verificar Estructura</button>
+                <button class="btn-limpiar" onclick="limpiarFormulario()">Limpiar Entrada</button>
+            </div>
+
+            <div id="mensaje"></div>
+
+            <div class="footer-logo">Sistema de Validación de Identidad Biométrica</div>
+        </div>
+    </div>
+
+    <script>
+        const inputCedula = document.getElementById('cedulaInput');
+        const resDiv = document.getElementById('mensaje');
+
+        // FUNCIÓN DE FORMATEO EN TIEMPO REAL CON GUIONES
+        inputCedula.addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, ''); 
+            let formateado = '';
+
+            if (valor.length > 0) {
+                formateado = valor.substring(0, 3);
+                if (valor.length > 3) {
+                    formateado += '-' + valor.substring(3, 10);
+                }
+                if (valor.length > 10) {
+                    formateado += '-' + valor.substring(10, 11);
+                }
+            }
+            e.target.value = formateado;
+            
+            // Ocultar mensaje si el usuario empieza a escribir de nuevo
+            if (resDiv.style.display === "block") {
+                resDiv.style.display = "none";
+            }
+        });
+
+        // NUEVA FUNCIÓN PARA LIMPIAR EL FORMULARIO
+        function limpiarFormulario() {
+            inputCedula.value = ''; // Borrar el input
+            resDiv.style.display = "none"; // Ocultar el mensaje
+            inputCedula.focus(); // Devolver el foco al input
+        }
+
+        function ejecutarAlgoritmo() {
+            let ced = inputCedula.value.replace(/-/g, "");
+
+            if (ced.length !== 11) {
+                mostrarRes(false, "FORMATO INVÁLIDO (11 DÍGITOS REQUERIDOS)");
+                return;
+            }
+
+            let suma = 0;
+            for (let i = 0; i < 10; i++) {
+                let digito = parseInt(ced.charAt(i));
+                let peso = (i % 2 === 0) ? 1 : 2;
+                
+                let multi = digito * peso;
+                if (multi > 9) multi -= 9; 
+                
+                suma += multi;
+            }
+
+            let verificadorReal = parseInt(ced.charAt(10));
+            let digitoCalculado = (10 - (suma % 10)) % 10;
+
+            if (digitoCalculado === verificadorReal) {
+                mostrarRes(true, "CÉDULA CORRECTA (ESTRUCTURA VÁLIDA)");
+            } else {
+                mostrarRes(false, "CÉDULA INCORRECTA (FALLA MÓDULO 10)");
+            }
+        }
+
+        function mostrarRes(esValida, texto) {
+            resDiv.style.display = "block";
+            resDiv.textContent = texto;
+            resDiv.className = esValida ? "valida" : "invalida";
+        }
+    </script>
+</body>
+</html>
