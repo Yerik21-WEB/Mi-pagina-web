@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Médico Múltiples Páginas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+  <h2 id="formTitle">Registro Médico</h2>
+  
+  <form id="medicalForm">
+    
+    <div class="step active">
+      <h3>Página 1: Datos Personales</h3>
+      <div class="input-group">
+        <label>Nombre Completo:</label>
+        <input type="text" id="nombre" placeholder="Ej. Juan Pérez">
+      </div>
+      <div class="input-group">
+        <label>Cédula / ID:</label>
+        <input type="text" id="cedula" placeholder="Ej. 001-0000000-0">
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>Página 2: Familiares</h3>
+      <div class="input-group">
+        <input type="text" id="famNombre" placeholder="Nombre (Ej. Dionisio Silverio)">
+        <input type="text" id="famParentesco" placeholder="Parentesco (Ej. Padre)">
+        <input type="number" id="famEdad" placeholder="Edad (Ej. 84)">
+        <button type="button" class="btn-add" onclick="agregarFamiliar()">+ Agregar Familiar</button>
+      </div>
+      <ul id="listaFamiliares" class="data-list"></ul>
+    </div>
+
+    <div class="step">
+      <h3>Página 3: Condiciones Pre-Existentes de Salud</h3>
+      <div class="input-group">
+        <input type="text" id="condEnfermedad" placeholder="Enfermedad (Ej. Hipertensión)">
+        <input type="text" id="condTiempo" placeholder="Tiempo con la enfermedad (Ej. 5 años)">
+        <button type="button" class="btn-add" onclick="agregarCondicion()">+ Agregar Condición</button>
+      </div>
+      <ul id="listaCondiciones" class="data-list"></ul>
+    </div>
+
+    <div class="step">
+      <h3>Página 4: Internamientos Realizados</h3>
+      <div class="input-group">
+        <input type="date" id="intFecha">
+        <input type="text" id="intCentro" placeholder="Centro Médico">
+        <input type="text" id="intDiagnostico" placeholder="Diagnóstico">
+        <button type="button" class="btn-add" onclick="agregarInternamiento()">+ Agregar Internamiento</button>
+      </div>
+      <ul id="listaInternamientos" class="data-list"></ul>
+    </div>
+
+    <div class="step">
+      <h3>Página 5: Datos Registrados</h3>
+      <p>Resumen de la información ingresada:</p>
+      <div id="tablasContenedor"></div>
+    </div>  
+
+    <div class="form-navigation">
+      <button type="button" id="prevBtn" onclick="cambiarPaso(-1)">Anterior</button>
+      <button type="button" id="nextBtn" onclick="cambiarPaso(1)">Siguiente</button>
+    </div>
+
+  </form>
+</div>
+
+<div class="registros-guardados-container">
+  <h2>Pacientes Registrados (Guardados en Memoria)</h2>
+  <div id="tablaGlobalContenedor">
+    <p>No hay registros guardados aún.</p>
+  </div>
+  <button type="button" id="btnLimpiarDatos" onclick="limpiarLocalStorage()" style="background-color: #dc3545; margin-top: 15px;">Borrar todos los datos</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
