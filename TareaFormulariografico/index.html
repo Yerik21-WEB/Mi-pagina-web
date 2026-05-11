@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema de Estadísticas</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Bienvenidos a mi Formulario de Graficos</h1>
+
+        <!-- SELECTORES -->
+        <div class="fila">
+
+            <select id="categoria">
+
+                <option value="ventas">
+                    Ventas
+                </option>
+
+                <option value="genero">
+                    Hombres y Mujeres
+                </option>
+
+                <option value="carreras">
+                    Carreras Universitarias
+                </option>
+
+            </select>
+
+            <select id="tipoGrafico">
+
+                <option value="bar">
+                    Barras
+                </option>
+
+                <option value="line">
+                    Líneas
+                </option>
+
+                <option value="pie">
+                    Circular
+                </option>
+
+                <option value="doughnut">
+                    Dona
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- FORMULARIO DINÁMICO -->
+        <div id="formularioDinamico">
+
+        </div>
+
+        <!-- TABLA -->
+        <table class="tabla">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Registro
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tablaDatos">
+
+            </tbody>
+
+        </table>
+
+        <!-- BOTONES -->
+        <div class="fila botones">
+
+            <button id="generarBtn">
+                Generar Gráfico
+            </button>
+
+            <button id="limpiarBtn">
+                Limpiar
+            </button>
+
+        </div>
+
+        <!-- GRÁFICO -->
+        <div class="grafico">
+
+            <canvas id="miGrafico"></canvas>
+
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
